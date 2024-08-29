@@ -1,0 +1,275 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{hyperref}
+\usepackage{amssymb,amsmath,amsthm}
+\title{Emacs常用快捷键}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+为后续记号方便, 我们记'Ctrl'为C, 'Alt'为M, 如果我们需要表示快捷键是 'Ctrl+C'则可记作 C-c.
+\section{基本快捷键}
+安装插件: M-x package-install 然后输入需要的package的名称可以用tab自动补全.
+中断当前命令: C-g,撤销命令 C-/
+
+光标的移动指令:
+\begin{itemize}
+\item M-v 向上翻页 C-v向下翻页
+\item C-p 向上一行 C-n向下一行
+\item C-f 向右一个字符 C-b 向左一个字符 M-f 向右一个单词 M-b 向左一个单词
+\item C-a 行首 C-e 行末 M-a 句首 M-e 句末 C-M-a环境首 C-M-e环境末
+\item M-$<$ 文件头 M-$>$ 文件尾
+\item M-g M-g+XXX 转至第XXX行
+\end{itemize}
+C-w 剪切, M-w 复制, C-y 粘贴, M-y 从剪贴板中选择
+
+剪切(删除)行:C-k表示剪切光标到行末, C-S-Backspace 剪切光标当前所在行. 这两个命令删除的内容是可以被C-y，M-y调用的.
+
+退格: 向左删除字符. C-退格: 向左删除单词(保存到剪贴板)
+
+C-d或者Delete 向右删除字符. M-d: 向右删除单词(保存到剪贴板)
+\section{关于Tex的快捷键}
+编译: C-c C-c 如果编译运行出现错误,可以通过输入 C-c ` 来查看编译日志(`是在数字1左边的按键), 如果我们需要目录则需要编译两次
+
+如果编译结束,我们可以通过 C-c C-c预览
+
+插入tex命令: C-c,输入命令名称,输入命令参数,可以用tab自动补全
+
+插入环境: C-c C-e,输入环境名称,可用tab自动补全
+\subsection{文本结构}
+Outline模式开启: M-x outline-minor-mode
+主要是下面的几个命令比较常用:
+\begin{itemize}
+\item Hide Body: C-c @ C-t(此处的@就是shift+2)
+
+\item Hide Entry: C-c @ C-c
+
+\item Show All: C-c @ C-a
+
+\item Show Entry: C-c @ C-e
+\end{itemize}
+
+插入章节: C-c C-s,选择章节层次,选择章节名称,其中均可用tab自动补全
+
+对于上述的Outline模式的命令太过繁杂,我们通过修改.emacs文件来修改快捷.对于修改玩的结果,上面的命令可以用C-o作为前缀使用.同样我们可以用C-c =打开目录. C-o C-o折叠除光标所在的章节外的所有章节,只保留其上层的结构名.
+
+我们可以利用C-o C-b/C-f在同级目录之间跳转, C-o C-q显示最顶层的目录结构,M-数字 C-o C-q 显示前N层的目录.Remark:M-数字= C-u 数字.
+
+Outline的便捷可以整体移动章,利用C-o C-\^\;/C-v向上或向下移动章节.由于只有一行所以可以直接选中剪切复制即可.
+\subsection{交叉引用}
+替换字符串: M-\%, 输入想要替换的字符串, 输入替换的字符串. 可以输入问号？查询替换方式
+
+\begin{itemize}
+\item Space 或者 y 表示替换一个匹配
+
+\item Delete 或者 n 表示跳过一个
+
+\item q表示退出
+
+\item ！表示全部替换 
+\end{itemize}
+
+对于标签的插入, 我们可以采用两种方法 1.手动输入label命令 2.用auctex的方式生成label
+
+但如果我们的ref是由auctex生成的, 那么他仅能够使用tab自动补全同样由auctex生成的label, 而不适用于手动输入的.
+
+我们可以利用pageref来获取对应label所在的页码
+
+\subsection{列表,表格与图片环境}
+如果我们已经完成了编译生成PDF, 那我们可以直接通过C-c C-v打开相应的PDF文件
+
+上文提及的利用auctex方式直接生成的环境, 有些也是直接含有label选项的, 那样的话在auctex生成的ref指令当中我们同样可以利用tab自动补全相应的label.
+
+在itemize环境中, 我们可以通过C-c C-j来直接自动插入item, 同样适用于enumerate环境. 同样可以对item做标签引用.
+
+改变环境的快捷键: 将光标移动至需要改变的环境内部,输入 C-u C-c C-e, 再输入想要改变的环境名
+
+在由auctex生成table环境过程中会有一个比较重要的参数format,其中可用的字符是
+\begin{itemize}
+\item r: 右对齐
+\item l: 左对齐
+\item c: 居中
+\item |: 插入列分隔符
+\end{itemize}
+
+补全环境:我们可以将光标移动到需要补全环境的地方,C-c ]就可以补全环境(end)
+
+在Emacs里,可以使用C-M-\%来使用正则表达式做替换.
+
+如果插入过多图片会使得运行速度变慢,我们可以选用在article前加入draft选项,他不插入图片但显示图片插入的范围可以对其进行调整.
+sss
+\subsection{区域选择与操作}
+我们用光标选中一个区域, C-c C-r 编译选中的区域
+
+我们用C-c *来选中光标所在的当前章节, C-c .来选中光标当前所在的环境.
+
+我们可以用C-c ;来注释或者取消注释选中的区域
+
+区域选择的快捷键:利用C-@或者C-Space设定标记,利用Emacs自带的光标移动快捷键选择选中区域大小
+
+C-x C-x交换光标和标记的位置,具体用法下面给出一个示例
+\begin{enumerate}
+\item 在章节的末尾输入
+\item C-c * 选中章节
+\item C-c C-r,编译章节
+\item C-x C-x,光标回到章节末尾
+\item 可以继续在章节末尾输入
+\end{enumerate}
+
+在选定区域后, 我们可以采用M-\%的方法对区域内进行替换, 我们也可使用 C-x Tab来调整整个区域的缩进，调整指令如下：
+\begin{itemize}
+\item $\rightarrow$: 右移一个空格
+\item Shift+$\rightarrow$:右移八个空格(=Tab)
+\item $\leftarrow$: 左移一个空格
+\item Shift+$\leftarrow$: 左移八个空格(=Tab)
+\end{itemize}
+a选定全文件的方法:
+\begin{enumerate}
+\item 组合快捷键
+  \begin{enumerate}
+  \item M-$<$跳转至文件首
+  \item C-@设置标记位置
+  \item M-$>$跳转至文件末尾
+  \end{enumerate}
+\item C-x h
+\end{enumerate}sss
+\subsection{Reftex}
+打开Reftex：M-x reftex-mode
+添加标签的快捷键:
+\begin{itemize}
+\item lbl+Tab 是cdlatex的快捷键
+\item C-c+( 是reftex的快捷键
+\end{itemize}
+上述自动生成的标签对于不同环境是不同的形式，如下所示
+\begin{enumerate}
+\item 在列表，数学公式当中，自动编号
+\item 章节，图标等：根据上下文或者自行输入,如果是英文章节，他会直接自动提取章节名做label
+\end{enumerate}
+添加引用快捷键
+\begin{itemize}
+\item ref+Tab 是cdlatex的快捷键
+\item C-c+）是reftex的快捷键
+\end{itemize}
+这之后就需要选择我们需要引用的标签的类型，每个标签所在的不同环境对应不同的按键。空格表示文章中所有的标签。其中的按键含义如下
+\begin{itemize}
+\item n 表示光标向下移动
+\item p 表示光标向上移动
+\item C-n$\backslash$p表示光标在章节名的跳转，n=next,p=previous
+\item 空格表示显示上下文
+\item r表示重新扫描文章，加入新的label
+\item 在第一个label处按m，后续的按, - + 最后按a 会生成分隔开的引用 ,表示用,隔开 -表示用破折号隔开 +表示用and隔开
+\item Enter 表示选择所需要的引用并关闭列表
+\end{itemize}
+
+不同的标签类型如下：
+\begin{itemize}
+\item e表示在数学环境下的标签，如equation align等
+\item f表示在图片环境下的标签
+\item i表示enumerate环境的标签
+\item l表示minted lstlisting的标签
+\item n表示footnote
+\item N表示endnote
+\item s表示section
+\item t表示表格环境下的标签
+\end{itemize}
+
+reftex可以根据上下文关键词识别你所需要的标签类型，如前文若是equation他会自动寻找数学环境下的标签
+
+我们可以自定义reftex识别的关键字快捷键如下：M-x customize-variable Enter reftex-label-alist Enter.
+\subsection{cdlatex自定义设置}
+cdlatex中的快捷键主要是以下三类
+\begin{itemize}
+\item 反引号(1左边的符号)输入数学符号
+\item 单引号'调整字体、重音符号
+\item Tab自动补全s
+\end{itemize}
+修改数学符号快捷键:M-x customize-variable Enter cdlatex-math-symbol-alist
+
+修改完了可以用C-x b快速回到之前的文件, 但修改不会立刻生效，我们需要用C-c C-n快速刷新文件, 个人建议修改需要遵循一定的内在逻辑 C-x C-s 保存
+
+修改数学字体快捷键：M-x customize-variable Enter cdlatex-math-modify-alist,这里我们可以用customize-variable-other-window来变成双屏模式
+
+修改自动匹配:：M-x customize-variable Enter cdlatex-paired-parens,这个命令是可以不用刷新就可以生效的
+
+自定义补全命令：M-x customize-variable Enter cdlatex-command-alist 如果需要调整光标位置把希望光标停留的地方打上问号，然后在Hook栏打开cdlatex-position-cursor
+
+M-/:自动根据文本补全，多次按则在备选补全文本中选择,在自定义补全命令时，我们需要用C-j来换行
+
+对于自定义补全环境，推荐使用hook：cdlatex-environment 并在argument里输入双引号括起的环境名这与用C-c \{ 一样
+
+上述的环境模板我们可以通过M-x customize-variable Enter cdlatex-env-alist访问修改,自动加label的命令是在后面加上AUTOLABEL
+
+\subsection{自定义定理环境}
+我们在导言区新输入一个宏包以后，需要用C-c C-n指令让Auctex重新读取导言区，但值得注意的是如果我们是通过C-c Enter usepackage Enter amsthm 的方法加入宏包, 那么auctex会自动载入相关的latex指令.
+
+我们通过C-c Enter newtheorem的方法加入指令,其中需要填写三个参数,是在latex里调用时的环境名和两个与计数器相关的参数, 最后会跳转到一个花括号内部, 在其中输入该环境在生成文档中的名字.
+
+如果我们希望两个不同的定理环境使用相同的计数器, 那么我们可以在newtheorem的参数numbered like输入你想使用相同计数器的环境名. 如我们已经设置了theorem环境,我们还想要设置一个lemma环境,并且希望lemma环境和theorem使用相同的计数器,那我们只需要在定义lemma环境的newtheorem指令的参数numbered like下输入theorem即可.
+
+至于第三个参数within counter 指的是你是否遵循章节的编号,即如果你设定了within counter:section,那么在第一节你的定理将按照1.1,\ 1.2这样的格式,第二节则是2.1,\ 2.2,以此类推.
+
+上述所提到的定理环境主要是针对定理,引理,命题这类的.
+
+下面我们可以修改定理环境的格式,我们可以利用C-c Enter theoremstyle Enter 这里有三个不同的格式选择分别是 definition,\ plain,\ remark.
+
+如果我们利用lbl生成标签,但他的label会是sec开头的,我们需要对他进行一定的修改.利用M-x customize-variable Enter reftex-label-alist. 但这么设置会使所有的定理环境都按照你的设置标号,你可以通过下面的命令设置一个flag: M-x customize-variable Enter reftex-insert-label-flags.ss
+\subsection{Preview-latex}
+由于Preview-latex本身对于中文文档的编译并不是很友好,因此建议使用其尽量处于英文文档进行.
+
+快捷键简单介绍和记忆技巧:1.生成预览快捷键前缀是: C-c C-p(p=preview) 2.清除预览快捷键前缀:C-c C-p C-c(p=preview, c=clearout)
+
+后续接
+\begin{itemize}
+\item C-p (p=point) 当前位置 
+\item C-e (e=environment) 当前环境(注意这个地方是没有清除预览快捷键的,我们如果需要清除,那应该用C-c C-p C-c C-b)
+\item C-s (s=section) 当前章节
+\item C-b (b=buffer) 当前缓冲区
+\item C-r (r=region) 当前区域
+\end{itemize}
+我们主要讲一下C-c C-p C-p的作用:1.如果在没有预览的情况下,C-c C-p C-p会编译整个文件,如果我们选中了一个区域, 那C-c C-p C-p 相当于编译了区域.我们如果编译了一个公式,光标移进去修改之后我们可以直接用C-c C-p C-p的命令重新编译(要求光标在环境内),我们也可以用C-c C-p C-p在latex源码和编译结果之间跳转.
+
+Preview-latex有一些自定义选项:M-x customize-variable Enter preview-default-option-list,里面可以修改预览编译的类型选择.ss
+\subsection{TeX-fold 代码折叠}
+打开方式:
+\begin{itemize}
+\item M-x TeX-fold-mode 
+\item 菜单LaTex Show/Hide Fold Mode 
+\item C-c C-o C-f
+\end{itemize}
+C-c C-o C-b:折叠整个Buffer,其中C-c C-o是Tex-fold-molde的命令前缀,C-b,b=buffer.
+下面给出常用的命令:
+\begin{itemize}
+\item C-c C-o C-b折叠整个buffer C-c C-o b展开全部buffer 
+\item  C-c C-o C-r折叠整个区域 C-c C-o r展开区域 
+\end{itemize}
+如果我们需要折叠一个章节,那 C-c *选中章节, C-c C-o C-r折叠章节.
+
+Tex-fold的自定义设置: C-h v 变量名: 获取一个变量的帮助信息
+
+自定义marcos: TeX-fold-macro-spec-list
+
+自定义环境:TeX-fold-env-spec-list
+
+自定义数学符号:LaTeX-fold-math-spec-list,需要输入Unicode字符,比较麻烦,不建议修改.
+
+\subsection{Org-noter使用}
+我们可以通过打开PDF以后利用M-x org-noter,从而打开org-noter模式,第一次使用会询问文件名和存储位置,从而自动生成org文件.后续可以直接打开org文件.
+
+如果需要导入pdf的大纲,我们需要在pdf界面用M-x org-noter-create-skeleton导入PDF大纲. 在PDF-tools中,可以利用o/q来显示和关闭大纲.
+
+在org-mode当中核心操作是如何展开和折叠一个标题,我们利用<Tab>键完成此功能,多次按<Tab>在展示标题的子标题,展示子标题的内容以及仅展示母标题之间循环. 我们利用Shift+Tab在任何地方可以同时展开和折叠标题
+
+我们可以利用Alt+方向左键或者方向右键可以修改一个标题的层级,不能修改其中的子标题的层级.我们可以利用Shift+Alt+方向左右键,同时修改选中标题与其子标题的层级.
+
+org-noter是通过记录页码和位置保持笔记文件和PDF文件的同步,依据定位精度有三种插入方式:
+\begin{enumerate}
+\item 按 i 在当前页插入笔记(page note)
+\item 按 M-i 在鼠标点击位置插入笔记(precise note)
+\item 选中文字以后,按 Tab或者M-i或者i在选中文字位置插入笔记
+\end{enumerate}
+
+同样我们可以在笔记文件当中插入数学公式,我们可以打开cdlatex模式进行快速输入tex代码, 我们可以利用C-c C-x C-l预览tex输出,但是如果光标停留在公式以后,那么他只会编译光标前的公式,如果光标停留在空白处则会编译整节的代码.其次对于equ之类的需要tab键补全的环境,我们需要在空白行输入equ再按tab.
+
+org-noter可以保持笔记和PDF同步,我们在PDF页面滑动时笔记会随之移动,但是如果在笔记仅通过方向移动是无法与PDF相同步的,我们需要使用C-M-n来跳转到下一条笔记,p则是跳转到上一条笔记.这个跳动是依据笔记为单位,我们可以用 M-p或者M-n以页为单位跳转.
+
+\end{document}
