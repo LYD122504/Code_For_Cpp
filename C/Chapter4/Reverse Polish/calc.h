@@ -1,16 +1,17 @@
-//¼ÆËãÆ÷Í·ÎÄ¼ş,ÓÃÓÚÉùÃ÷ĞèÒªµÄº¯Êı
+//è®¡ç®—å™¨å¤´æ–‡ä»¶,ç”¨äºå£°æ˜éœ€è¦çš„å‡½æ•°
 #define NUMBER '0'
-// »º³åÇøµÄÊäÈë²Ù×÷
+// ç¼“å†²åŒºçš„è¾“å…¥æ“ä½œ
 int getch();
 void ungetch(int);
 void ungets(char s[]);
 int mod_getch();
 void mod_ungetch(int);
-//getop ÊäÈë×Ö·û´®
+//getop è¾“å…¥å­—ç¬¦ä¸²
 int getop(char s[]);
 int getline(char s[], int lim);
 int mod_getop(char s[], char* line);
-//Õ»²Ù×÷
+int static_getop(char s[]);
+//æ ˆæ“ä½œ
 void push(double);
 double pop();
 double show_top();

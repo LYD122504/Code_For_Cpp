@@ -32,7 +32,7 @@ int getop(char s[])
 	ungetch(c);
 	return NUMBER;
 }
-//�����ж�ȡ
+//按照行读取
 int j = 0;
 int getline(char s[], int lim)
 {
@@ -83,6 +83,37 @@ int mod_getop(char s[], char line[])
 			;
 	if (c == '.') /* collect fraction part */
 		while (isdigit(s[++i] = c = line[j++]))
+			;
+	s[i] = '\0';
+	return NUMBER;
+}
+//static_getop: 用静态变量
+int static_getop(char s[])
+{
+	int i;
+	static int c;
+	if (c == ' ' || c == '\t')
+		while ((s[0] = c = getch()) == ' ' || c == '\t')
+			;
+	s[1] = '\0';
+	if (!isdigit(c) && c != '.' && c != '-' && c != '+')
+		return c; /* not a number */
+	if (c == '-' || c == '+')
+	{
+		c = getch();
+		if (c == ' ' || c == '\t' || c == '\n')
+		{
+			return s[0];
+		}
+		s[1] = c;
+	}
+
+	i = (s[1] == c) ? 1 : 0;
+	if (isdigit(c)) /* collect integer part */
+		while (isdigit(s[++i] = c = getch()))
+			;
+	if (c == '.') /* collect fraction part */
+		while (isdigit(s[++i] = c = getch()))
 			;
 	s[i] = '\0';
 	return NUMBER;
