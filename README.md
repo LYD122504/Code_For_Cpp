@@ -6,6 +6,16 @@
 
 K&R 的经典书籍,作为已有C语言基础的本人而言,还是颇有收获,对其中的某些比较细碎的知识点是首次接触,但由于后续不太会以C为主力语言，故不会再深入学习C与指针之类的，转而进入C++的内容。
 
+## 目录
+
+以下的笔记可以直接阅读个人网站:[还施水阁](https://lyd122504.github.io/)
+
+### K&R笔记
+
+- 第2章: [位运算操作符](./The C progamming language/Chapter2/ANSI-bit.md)
+- 第3章: [Exercise4](./The C progamming language/Chapter3/Ch3_E4.md)
+- 第4章:[逆波兰表达式计算器](./The C progamming language/Chapter4/ANSI-cacul.md)  [限定词用法](./The C progamming language/Chapter4/ANSI-extern.md)  [KMP算法](./The C progamming language/Chapter4/ANSI-KMP.md) [快速排序算法](./The C progamming language/Chapter4/Ch4_quicksort.md))
+
 ## 更新日程
 
 ### The C programming language
