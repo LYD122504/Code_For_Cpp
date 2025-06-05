@@ -12,7 +12,7 @@ K&R 的经典书籍,作为已有C语言基础的本人而言,还是颇有收获,
 
 ### K&R笔记
 
-- 第2章: [位运算操作符]("/The C programming language/Chapter2/ANSI-bit.md")
+- 第2章: [位运算操作符](/The%20C%20programming%20language/Chapter2/ANSI-bit.md)
 - 第3章: [Exercise4](./The C progamming language/Chapter3/Ch3_E4.md)
 - 第4章:[逆波兰表达式计算器](./The C progamming language/Chapter4/ANSI-cacul.md)  [限定词用法](./The C progamming language/Chapter4/ANSI-extern.md)  [KMP算法](./The C progamming language/Chapter4/ANSI-KMP.md) [快速排序算法](./The C progamming language/Chapter4/Ch4_quicksort.md))
 
